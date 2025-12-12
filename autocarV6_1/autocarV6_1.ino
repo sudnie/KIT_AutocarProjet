@@ -56,6 +56,10 @@ float integral = 0;
 
 bool turnR = 0;
 
+int state = 0;
+int timeS1 = 0;
+float GC = 1;
+
 // =================== 工具函数区 ===================
 inline int clampPWM(int v) {
   return constrain(v, MIN_SPEED, MAX_SPEED);
@@ -209,14 +213,9 @@ void rotateBase(bool turnRight) {
   }
 }
 
-// int rtime = millis();
 // ============= 旋转直到齐平 + 超声波清晰 =============
 void rotateUntilAligned(bool turnRight) {
   bool t180 = 0;
-  // if (millis() - rtime > 3000){
-  //   //rc = rc + 1;
-  //   rtime = 0;
-  // }
   int dista = 20;
 
   if( decideTurnDirectionUtrun()){
@@ -340,10 +339,10 @@ void setup() {
 
   readIRSensors();
   if(decideTurnDirectionUtrun()){
-        digitalWrite(12, HIGH);
+    digitalWrite(12, HIGH);
     digitalWrite(13, HIGH);
-    delay(500);
-        digitalWrite(12, LOW);
+    delay(100);
+    digitalWrite(12, LOW);
     digitalWrite(13, LOW);
   }
   autoCalibrateSide();
@@ -353,9 +352,7 @@ void setup() {
 // 0 ： 前进
 // 1 : 准备转向
 // 2 : 转向
-int state = 0;
-int timeS1 = 0;
-float GC = 1;
+
 // =================== loop ===================
 void loop() {
 
@@ -400,7 +397,6 @@ void loop() {
       }
     case 2:
       {
-        break;
         if (turnR) {
           rotateUntilAligned(turnR);
           state = 0;
