@@ -1,5 +1,5 @@
 // ======================================================
-//         Maze Car Full Control v8 (Auto Tune Edition)
+//         Maze Car Full Control v4 (Auto Tune Edition)
 //  — 自动阈值标定 / 自动 PID / 三点平均 + EMA双滤波 —
 // ======================================================
 
